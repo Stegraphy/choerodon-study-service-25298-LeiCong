@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="io.choerodon.todo.infra.mapper.UserMapper">
+
+    <resultMap id="userDTO" type="io.choerodon.todo.infra.dto.UserDTO" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="enabled" column="is_enabled"/>
+        <result property="locked" column="is_locked"/>
+        <result property="ldap" column="is_ldap"/>
+        <result property="admin" column="is_admin"/>
+        <result property="password" column="hash_password"/>
+    </resultMap>
+
+
+
+    <select id="listUsersByIds" resultMap="userDTO">
+        SELECT * FROM iam_user
+        WHERE id IN
+        <foreach item="id" index="index" collection="ids"
+                 open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        <if test="onlyEnabled == true">
+            AND is_enabled = 1
+        </if>
+    </select>
+
+
+
+    <select id="listUsersByEmails" resultMap="userDTO">
+        SELECT * FROM iam_user
+        WHERE email IN
+        <foreach item="email" index="index" collection="emails"
+                 open="(" separator="," close=")">
+            #{email}
+        </foreach>
+        AND is_enabled = 1
+    </select>
+
+
+    <select id="queryById" parameterType="java.lang.Long" resultMap="userDTO">
+        SELECT * FROM STUDY_USER
+        where ID = #{id}
+    </select>
+
+
+
+
+
+
+
+</mapper>

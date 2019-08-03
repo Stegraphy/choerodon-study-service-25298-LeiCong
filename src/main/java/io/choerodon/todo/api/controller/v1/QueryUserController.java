@@ -6,20 +6,24 @@ import io.choerodon.todo.infra.dto.UserDTO;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class QueryUserController {
-   /* @Autowired
+    @Autowired
     QueryUser queryUser;
-    @GetMapping(value = "/user/{organization_id}/{id}")
+    @GetMapping(value = "organizations/{organization_id}/users/{user_id}")
     @Permission(type = ResourceType.SITE, permissionLogin = true)
 //    @Permission(type = ResourceType.SITE, permissionPublic = true)
     @ApiOperation(value = "根据id查询用户")
     public ResponseEntity<UserDTO> query(@PathVariable(name = "organization_id") Long organizationId,
-                                         @PathVariable Long id) {
-        return queryUser.query(organizationId,id);
-    }*/
+                                         @PathVariable Long user_id) {
+        ResponseEntity<UserDTO> userDTO = queryUser.query(organizationId,user_id);
+
+        System.out.println("Here？");
+        System.out.println(userDTO);
+        return queryUser.query(organizationId,user_id);
+    }
+
+
 }

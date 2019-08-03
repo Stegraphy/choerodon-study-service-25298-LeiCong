@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient("iam-service")
 public interface QueryUser {
-    @GetMapping(value = "/iam/v1/organizations/{organization_id}/users/{user_id}")
+    @GetMapping(value = "/v1/organizations/{organization_id}/users/{user_id}")
     public ResponseEntity<UserDTO> query(@PathVariable(name = "organization_id") Long organizationId,
-                                         @PathVariable Long user_id);
+                                         @PathVariable(name = "user_id") Long user_id);
 }

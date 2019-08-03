@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrgnizationController {
     @Autowired
     OrganizationsClient organizationsClient;
-    @GetMapping(value = "/org/{organization_id}")
+    @GetMapping(value = "/organization/{organization_id}")
     @Permission(type = ResourceType.SITE, permissionLogin = true)
 //    @Permission(type = ResourceType.SITE, permissionPublic = true)
     @ApiOperation(value = "查询组织结构")
